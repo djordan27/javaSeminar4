@@ -24,7 +24,8 @@ public class task3 {
               System.out.println("Вы ввели неверное количество математических операций");
               return;
           }
-        System.out.println(myArithmetic(mathematicalOperationsList(array), numberList(array)));
+        System.out.println(myArithmetic(mathematicalOperationsList(array), flippedOverListInteger(numberList(array))));
+        System.out.println(flippedOverListInteger(numberList(array)));
     }
     public static String [] myScan(){
         Scanner scanner = new Scanner(System.in);
@@ -57,54 +58,98 @@ public class task3 {
         }
         return stringList;
     }
-    public static int myArithmetic (LinkedList<String> mathematic, LinkedList<Integer> numbers){
+    public static int myArithmetic (LinkedList<String> mathematic, LinkedList<Integer> numbers) {
         int sum = 0;
-//        int i = 0;
-//        while (i < mathematic.size()) {
-//            switch (mathematic.get(i)){
+        int number1 = 0;
+        int number2 = 0;
+
+        int i = -1;
+        while (i < mathematic.size() - 1) {
+            i++;
+            switch (mathematic.get(i)) {
+                case "+":
+                    if (i == 0){
+                        number1 = numbers.get(i);
+                        number2 = numbers.get(i + 1);
+                        sum = number1 + number2;
+                        System.out.println("Сработал + " + sum + "i = " + i + "number1 = " + number1 + "number2 = " + number2);
+                    } else if (i > 0){
+                        number1 = numbers.get(i + 1);
+                        sum = sum + numbers.get(i + 1);
+                        System.out.println(number1 + " +" + sum);
+                    }
+                    System.out.println("Сработал + " + sum);
+                    break;
+                case "-":
+                    if (i == 0){
+                        number1 = numbers.get(i);
+                        number2 = numbers.get(i + 1);
+                        sum = number1 - number2;
+                        System.out.println("a");
+                    } else if (i > 0){
+                        number1 = numbers.get(i + 1);
+                        sum = sum - numbers.get(i + 1);
+                        System.out.println("b");
+                    }
+                    System.out.println("Сработал -" + sum);
+                    break;
+                case "*":
+                    if (i == 0) sum = numbers.get(i) * numbers.get(i + 1);
+                    else sum = sum * numbers.get(i + 1);
+                    break;
+                case "/":
+                    if (i == 0) sum = numbers.get(i) / numbers.get(i + 1);
+                    else sum = sum / numbers.get(i + 1);
+            }
+//                int i = mathematic.size() + 1;
+//                int count = -1;
+//        while (i > 1 ) {
+//            i--;
+//            count++;
+//            switch (mathematic.get(count)){
 //                case"+":
-//                    if (i ==0) sum = numbers.get(i) + numbers.get(i+1);
-//                    else sum = sum + numbers.get(i+1);
+//                    if (i == mathematic.size() - 1) {sum = numbers.get(i) + numbers.get(i-1);}
+//                    else {sum = sum + numbers.get(i-1);}
+//                    System.out.println(sum + " +" + numbers.get(i-1) + " " + sum);
 //                    break;
 //                case"-":
-//                    if (i ==0) sum = numbers.get(i) - numbers.get(i+1);
-//                    else sum = sum - numbers.get(i+1);
+//                    if (i ==mathematic.size() - 1) {sum = numbers.get(i) - numbers.get(i-1);}
+//                    else {sum = sum - numbers.get(i-1);}
+//                    System.out.println(numbers.get(i) + " - " + numbers.get(i-1) + " " + sum);
 //                    break;
 //                case"*":
-//                    if (i ==0) sum = numbers.get(i) * numbers.get(i+1);
-//                    else sum = sum * numbers.get(i+1);
+//                    if (i ==mathematic.size() - 1) sum = numbers.get(i) * numbers.get(i-1);
+//                    else sum = sum * numbers.get(i-1);
 //                    break;
 //                case"/":
-//                    if (i ==0) sum = numbers.get(i) / numbers.get(i+1);
-//                    else sum = sum / numbers.get(i+1);
+//                    if (i ==mathematic.size() - 1) sum = numbers.get(i) / numbers.get(i-1);
+//                    else sum = sum / numbers.get(i-1);
 //            }
-                int i = mathematic.size() + 1;
-                int count = -1;
-        while (i > 1 ) {
-            i--;
-            count++;
-            switch (mathematic.get(count)){
-                case"+":
-                    if (i == mathematic.size() - 1) {sum = numbers.get(i) + numbers.get(i-1);}
-                    else {sum = sum + numbers.get(i-1);}
-                    System.out.println(sum + " +" + numbers.get(i-1) + " " + sum);
-                    break;
-                case"-":
-                    if (i ==mathematic.size() - 1) {sum = numbers.get(i) - numbers.get(i-1);}
-                    else {sum = sum - numbers.get(i-1);}
-                    System.out.println(numbers.get(i) + " - " + numbers.get(i-1) + " " + sum);
-                    break;
-                case"*":
-                    if (i ==mathematic.size() - 1) sum = numbers.get(i) * numbers.get(i-1);
-                    else sum = sum * numbers.get(i-1);
-                    break;
-                case"/":
-                    if (i ==mathematic.size() - 1) sum = numbers.get(i) / numbers.get(i-1);
-                    else sum = sum / numbers.get(i-1);
-            }
-            System.out.println(sum);
+//            System.out.println(sum);
+//
+//        }
 
         }
         return sum;
     }
+    public static LinkedList<Integer> flippedOverListInteger (LinkedList<Integer> newMyList){
+        int count = newMyList.size();
+
+        for (int i = 1; i <= count; i++) {
+            newMyList.offerFirst(i);
+            newMyList.removeLast();
+            //System.out.println(i);
+        }
+        return newMyList;
+    }
+//    public static LinkedList<String> flippedOverListString (LinkedList<String> newMyList){
+//        int count = newMyList.size();
+//
+//        for (int i = 1; i <= count; i++) {
+//            newMyList.offerFirst(i);
+//            newMyList.removeLast();
+//            //System.out.println(i);
+//        }
+//        return newMyList;
+//    }
 }
