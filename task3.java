@@ -24,8 +24,8 @@ public class task3 {
               System.out.println("Вы ввели неверное количество математических операций");
               return;
           }
-        System.out.println(myArithmetic(mathematicalOperationsList(array), flippedOverListInteger(numberList(array))));
-        System.out.println(flippedOverListInteger(numberList(array)));
+        System.out.println(myArithmetic(flippedOverListString(mathematicalOperationsList(array)), numberList(array)));
+        System.out.println(flippedOverListString(mathematicalOperationsList(array)));
     }
     public static String [] myScan(){
         Scanner scanner = new Scanner(System.in);
@@ -132,15 +132,22 @@ public class task3 {
         }
         return sum;
     }
-    public static LinkedList<Integer> flippedOverListInteger (LinkedList<Integer> newMyList){
+    public static LinkedList<String> flippedOverListString (LinkedList<String> newMyList){
         int count = newMyList.size();
+        LinkedList<String> myList = new LinkedList<String>();
+        String  value1;
+        for (int i = 0; i < count; i++) {
 
-        for (int i = 1; i <= count; i++) {
-            newMyList.offerFirst(i);
+            value1 = newMyList.getLast();
+//    newMyList.addFirst(value1);
+//    newMyList.removeLast();
+            myList.add(value1);
             newMyList.removeLast();
+            //System.out.println("i = " + i + " value 1 = " + value1);
             //System.out.println(i);
         }
-        return newMyList;
+        //System.out.println(myList);
+        return myList;
     }
 //    public static LinkedList<String> flippedOverListString (LinkedList<String> newMyList){
 //        int count = newMyList.size();
